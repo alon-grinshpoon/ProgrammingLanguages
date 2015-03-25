@@ -19,6 +19,7 @@ obj = 'obj'
 members = 'members'
 keyvalue = 'keyvalue'
 value = 'value'
+X = 'x'
 
 
 # terminals for the grammar from the recitation
