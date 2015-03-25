@@ -73,6 +73,7 @@ class JsonParser(object):
             raise SyntaxError("Syntax error: no rule for token: {}".format(self.t))
 
     def parse_obj(self):
+        print ">>>>>>>parsing obj..."
         if self.t in [LB]:
             lb = self.match(LB)
             first_member = self.parse_first_member()
@@ -83,15 +84,17 @@ class JsonParser(object):
         pass    
 
     def parse_first_member(self):
+        print ">>>>>>>parsing first_member..."
         if self.t in [STRING]:
                 members = self.parse_members()
-                return (first_member, (members))
+                return (first_member, (members,))
         elif self.t in [RB]:
                 return (first_member, ())
         else:
             raise SyntaxError("Syntax error: no rule for token: {}".format(self.t))
 
     def parse_members(self):
+        print ">>>>>>>parsing members..."
         if self.t in [STRING]:
             keyvalue = self.parse_keyvalue()
             X = self.parse_X();
@@ -101,6 +104,7 @@ class JsonParser(object):
         pass
 
     def parse_X(self):
+        print ">>>>>>>parsing X..."
         if self.t in [COMMA]:
             comma = self.match(COMMA)
             members = self.parse_members()
@@ -111,16 +115,18 @@ class JsonParser(object):
 
 
     def parse_keyvalue(self):
+        print ">>>>>>>parsing keyvalue..."
         if self.t in [STRING]:
             string = self.match(STRING)
             colon = self.match(COLON)
-            value = self.parse_value();
+            value = self.parse_value()
             return (keyvalue, (string, colon, value))
         else:
             raise SyntaxError("Syntax error: no rule for token: {}".format(self.t))     
         pass
 
     def parse_value(self):
+        print ">>>>>>>parsing value..."
         if self.t in [STRING]:
             string = self.match(STRING)
             return (value, (string,))
@@ -128,7 +134,8 @@ class JsonParser(object):
             integer = self.match(INT)
             return (value, (integer,))
         if self.t in [LB]:
-            lb = self.match(LB)
+            c = self.parse_obj();
+
             return (value, (lb,))
         else:
             raise SyntaxError("Syntax error: no rule for token: {}".format(self.t))
