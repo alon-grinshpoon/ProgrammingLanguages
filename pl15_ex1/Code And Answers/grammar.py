@@ -99,11 +99,15 @@ def calculate_select(terminals, nonterminals, grammar, nullable, first, follow):
     """
     select = dict()
     for rule in grammar:
+		select[format_rule(rule)] = set()
+    for rule in grammar:
 		head, body = rule
 		if not set(body).issubset(nullable):
-			select[format_rule(rule)] = select[format_rule(rule)].union(first[body])
+			select[format_rule(rule)] = select[format_rule(rule)].union(first[body[0]])
 		else:
-			select[format_rule(rule)] = select[format_rule(rule)].union(first[body].union(follow[body]))
+			select[format_rule(rule)] = select[format_rule(rule)].union(follow[head])
+			if len(body) != 0:
+				select[format_rule(rule)] = select[format_rule(rule)].union(first[body[0]])		
     return select
 
 
