@@ -178,17 +178,17 @@ def analyze_grammar(grammar):
     print
 
 
-#grammar_json_4a = [
-#    (json, (obj, EOF)),                     # json-> obj EOF
-#    (obj, (LB, RB)),                     	# obj-> {}
-    #(obj, (LB, members, RB)),               # obj-> {members}
-    #(members, (keyvalue)),             		# members-> keyvalue
-    #(members, (members, members)),          # members-> members,members
-#    (keyvalue, (STRING, COLON, value)),     # keyvalue-> string : value
-    #(value, (STRING))						# value -> string
-#	(value, (INT))							# value -> int
-#	(value, (obj))							# value -> obj
-#]
+grammar_json_4a = [
+    (json, (obj, EOF)),                     # json-> obj EOF
+    (obj, (LB, RB)),                     	# obj-> {}
+    (obj, (LB, members, RB)),               # obj-> {members}
+    (members, (keyvalue)),             		# members-> keyvalue
+    (members, (members, members)),          # members-> members,members
+    (keyvalue, (STRING, COLON, value)),     # keyvalue-> string : value
+    (value, (STRING))						# value -> string
+	(value, (INT))							# value -> int
+	(value, (obj))							# value -> obj
+]
 
 grammar_json_4b = [
     #
