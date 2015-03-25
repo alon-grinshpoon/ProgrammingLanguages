@@ -76,9 +76,21 @@ class JsonParser(object):
         #
         # --- CHANGE THE BODY OF THIS FUNCTION ---
         #        
+        pass    
+
+    def parse_first_member(self):
+        #
+        # --- CHANGE THE BODY OF THIS FUNCTION ---
+        #        
         pass
 
     def parse_members(self):
+        #
+        # --- CHANGE THE BODY OF THIS FUNCTION ---
+        #        
+        pass
+
+    def parse_X(self):
         #
         # --- CHANGE THE BODY OF THIS FUNCTION ---
         #        
@@ -95,6 +107,8 @@ class JsonParser(object):
         # --- CHANGE THE BODY OF THIS FUNCTION ---
         #        
         pass
+
+
 
 
     #
