@@ -73,9 +73,13 @@ class JsonParser(object):
             raise SyntaxError("Syntax error: no rule for token: {}".format(self.t))
 
     def parse_obj(self):
-        #
-        # --- CHANGE THE BODY OF THIS FUNCTION ---
-        #        
+        if self.t in [LB]:
+            lb = self.match(LB)
+            members = self.parse_members();
+			rb = self.match(RB)
+            return (obj, (lb, members, rb)),
+        else:
+            raise SyntaxError("Syntax error: no rule for token: {}".format(self.t))  
         pass    
 
     def parse_first_member(self):
@@ -85,9 +89,18 @@ class JsonParser(object):
         pass
 
     def parse_members(self):
-        #
-        # --- CHANGE THE BODY OF THIS FUNCTION ---
-        #        
+        if self.t in [LB]:
+            lb = self.match(LB)
+			try:
+				rb = self.match(RB)
+				return (members, ())
+			except:
+            	keyvalue = self.parse_keyvalue();
+				x = self.parse_value();
+				rb = self.match(RB)
+    			return (members, (keyvalue , x)),  
+        else:
+            raise SyntaxError("Syntax error: no rule for token: {}".format(self.t))     
         pass
 
     def parse_X(self):
