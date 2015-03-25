@@ -199,8 +199,9 @@ grammar_json_4a = [
 
 grammar_json_4b = [
     (json, (obj, EOF)),                     # json-> obj EOF
-    (obj, (LB, members, RB)),               # obj-> {members}
-    (members, ()),                          # members-> epsilon
+    (obj, (LB, first_member, RB)),          # obj-> {first_member}
+    (first_member, ()),                     # first_member-> epsilon
+    (first_member, (members)),              # first_member-> members
     (members, (keyvalue)),                  # members-> keyvalue
     (members, (keyvalue, COMMA, members)),  # members-> keyvalue, members
     (keyvalue, (STRING, COLON, value)),     # keyvalue-> string : value
@@ -211,10 +212,11 @@ grammar_json_4b = [
 
 grammar_json_4c = [
     (json, (obj, EOF)),                     # json-> obj EOF
-    (obj, (LB, members, RB)),               # obj-> {members}
-    (members, ()),                          # members-> epsilon
-    (members, (keyvalue , X)),              # members-> keyvalue X
-    (X, (COMMA, members)),                  # X-> , members
+    (obj, (LB, first_member, RB)),          # obj-> {first_member}
+    (first_member, ()),                     # first_member-> epsilon
+    (first_member, (members)),              # first_member-> members
+    (members, (keyvalue, X)),               # members-> keyvalue X
+    (X, (COMMA, members)),                  # X-> , members X
     (X, ()),                                # X-> epsilon
     (keyvalue, (STRING, COLON, value)),     # keyvalue-> string : value
     (value, (STRING,)),                     # value -> string
@@ -224,16 +226,7 @@ grammar_json_4c = [
 
 
 grammar_json_6 = [
-    (json, (obj, EOF)),                     # json-> obj EOF
-    (obj, (LB, members, RB)),               # obj-> {members}
-    (members, ()),                          # members-> epsilon
-    (members, (keyvalue , X)),              # members-> keyvalue X
-    (X, (COMMA, members)),                  # X-> , members
-    (X, ()),                                # X-> epsilon
-    (keyvalue, (STRING, COLON, value)),     # keyvalue-> string : value
-    (value, (STRING,)),                     # value -> string
-    (value, (INT,)),                        # value -> int
-    (value, (obj,))                         # value -> obj
+
 ]
 
 
@@ -247,8 +240,8 @@ def main():
     print
     analyze_grammar(grammar_json_4c)
     print
-     #analyze_grammar(grammar_json_6)
-    # print
+    analyze_grammar(grammar_json_6)
+    print
 
     #
     # --- ADD MORE TEST CASES HERE ---

@@ -17,10 +17,12 @@ EOF = 'EOF'        # end of file marker
 json = 'json'
 obj = 'obj'
 members = 'members'
+first_member = 'first_member'
 keyvalue = 'keyvalue'
 value = 'value'
-X = 'x'
-
+X = 'X'
+member = 'members'
+array = 'array'
 
 # terminals for the grammar from the recitation
 LP = 'LP'          # (
