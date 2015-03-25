@@ -166,9 +166,15 @@ def analyze_grammar(grammar):
 
 
 grammar_json_4a = [
-    #
-    # --- FILL IN HERE IN QUESTION 4.a ---
-    #
+    (json, (obj, EOF)),                     # json-> obj EOF
+    (obj, (LB, RB)),                     	# obj-> {}
+    (obj, (LB, members, RB)),               # obj-> {members}
+    (members, (keyvalue)),             		# members-> keyvalue
+    (members, (members, members)),          # members-> members,members
+    (keyvalue, (string, COLON, value)),     # keyvalue-> string : value
+    (value, (string))						# value -> string
+	(value, (int))							# value -> int
+	(value, (obj))							# value -> obj
 ]
 
 grammar_json_4b = [
