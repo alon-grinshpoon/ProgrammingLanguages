@@ -188,15 +188,21 @@ grammar_json_4a = [
     (members, (keyvalue)),             		# members-> keyvalue
     (members, (members, members)),          # members-> members,members
     (keyvalue, (STRING, COLON, value)),     # keyvalue-> string : value
-    (value, (STRING))						# value -> string
-#	(value, (INT))							# value -> int
-#	(value, (obj))							# value -> obj
+    (value, (STRING,)),						# value -> string
+	(value, (INT,)),						# value -> int
+	(value, (obj,))							# value -> obj
 ]
 
 grammar_json_4b = [
-    #
-    # --- FILL IN HERE IN QUESTION 4.b ---
-    #
+    (json, (obj, EOF)),                     # json-> obj EOF
+    (obj, (LB, RB)),                        # obj-> {}
+    (obj, (LB, members, RB)),               # obj-> {members}
+    (members, (keyvalue)),                  # members-> keyvalue
+    (members, (members, keyvalue)),         # members-> members, keyvalue
+    (keyvalue, (STRING, COLON, value)),     # keyvalue-> string : value
+    (value, (STRING,)),                     # value -> string
+    (value, (INT,)),                        # value -> int
+    (value, (obj,))                         # value -> obj
 ]
 
 grammar_json_4c = [
