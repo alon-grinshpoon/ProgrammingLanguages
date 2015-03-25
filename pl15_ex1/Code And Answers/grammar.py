@@ -190,7 +190,7 @@ grammar_json_4a = [
     (obj, (LB, RB)),                     	# obj-> {}
     (obj, (LB, members, RB)),               # obj-> {members}
     (members, (keyvalue)),             		# members-> keyvalue
-    (members, (members, members)),          # members-> members,members
+    (members, (members, COMMA, members)),   # members-> members,members
     (keyvalue, (STRING, COLON, value)),     # keyvalue-> string : value
     (value, (STRING,)),						# value -> string
 	(value, (INT,)),						# value -> int
@@ -202,7 +202,7 @@ grammar_json_4b = [
     (obj, (LB, members, RB)),               # obj-> {members}
     (members, ()),                          # members-> epsilon
     (members, (keyvalue)),                  # members-> keyvalue
-    (members, (keyvalue, members)),         # members-> keyvalue, members
+    (members, (keyvalue, COMMA, members)),  # members-> keyvalue, members
     (keyvalue, (STRING, COLON, value)),     # keyvalue-> string : value
     (value, (STRING,)),                     # value -> string
     (value, (INT,)),                        # value -> int
@@ -213,19 +213,27 @@ grammar_json_4c = [
     (json, (obj, EOF)),                     # json-> obj EOF
     (obj, (LB, members, RB)),               # obj-> {members}
     (members, ()),                          # members-> epsilon
-    (members, (keyvalue , X)),              # members-> keyvalue, X
+    (members, (keyvalue , X)),              # members-> keyvalue X
+    (X, (COMMA, members)),                  # X-> , members
     (X, ()),                                # X-> epsilon
-    (X, (members, )),                       # X-> members
     (keyvalue, (STRING, COLON, value)),     # keyvalue-> string : value
     (value, (STRING,)),                     # value -> string
     (value, (INT,)),                        # value -> int
     (value, (obj,))                         # value -> obj
 ]
 
-grammar_json__6 = [
-    #
-    # --- FILL IN HERE IN QUESTION 6 ---
-    #
+
+grammar_json_6 = [
+    (json, (obj, EOF)),                     # json-> obj EOF
+    (obj, (LB, members, RB)),               # obj-> {members}
+    (members, ()),                          # members-> epsilon
+    (members, (keyvalue , X)),              # members-> keyvalue X
+    (X, (COMMA, members)),                  # X-> , members
+    (X, ()),                                # X-> epsilon
+    (keyvalue, (STRING, COLON, value)),     # keyvalue-> string : value
+    (value, (STRING,)),                     # value -> string
+    (value, (INT,)),                        # value -> int
+    (value, (obj,))                         # value -> obj
 ]
 
 
