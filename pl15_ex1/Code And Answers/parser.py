@@ -75,27 +75,25 @@ class JsonParser(object):
     def parse_obj(self):
         if self.t in [LB]:
             lb = self.match(LB)
-            first_member = self.parse_first_member();
-	    rb = self.match(RB)
+            first_member = self.parse_first_member()
+            rb = self.match(RB)
             return (obj, (lb, first_member, rb))
         else:
             raise SyntaxError("Syntax error: no rule for token: {}".format(self.t))  
         pass    
 
     def parse_first_member(self):
-        if self.t in [LB]:
-	    try:
-                members = self.parse_members();
+        if self.t in [STRING]:
+                members = self.parse_members()
                 return (first_member, (members))
-            except:
+        elif self.t in [RB]:
                 return (first_member, ())
         else:
-            raise SyntaxError("Syntax error: no rule for token: {}".format(self.t))     
-        pass
+            raise SyntaxError("Syntax error: no rule for token: {}".format(self.t))
 
     def parse_members(self):
-        if self.t in [LB]:
-            keyvalue = self.parse_keyvalue();
+        if self.t in [STRING]:
+            keyvalue = self.parse_keyvalue()
             X = self.parse_X();
             return (members, (keyvalue , X))
         else:
@@ -103,19 +101,17 @@ class JsonParser(object):
         pass
 
     def parse_X(self):
-        if self.t in [LB]:
-	    try:
-                comma = self.match(COMMA)
-                members = self.parse_members();
-                return (X, (comma, members))
-            except:
-                return (X, ())
-        else:
-            raise SyntaxError("Syntax error: no rule for token: {}".format(self.t))     
-        pass
+        if self.t in [COMMA]:
+            comma = self.match(COMMA)
+            members = self.parse_members()
+            return (X, (comma, members))
+        elif self.t in [RB]:
+            return (first_member, ())
+        raise SyntaxError("Syntax error: no rule for token: {}".format(self.t))
+
 
     def parse_keyvalue(self):
-        if self.t in [LB]:
+        if self.t in [STRING]:
             string = self.match(STRING)
             colon = self.match(COLON)
             value = self.parse_value();
@@ -125,20 +121,18 @@ class JsonParser(object):
         pass
 
     def parse_value(self):
+        if self.t in [STRING]:
+            string = self.match(STRING)
+            return (value, (string,))
+        if self.t in [INT]:
+            integer = self.match(INT)
+            return (value, (integer,))
         if self.t in [LB]:
-	    try:
-                string = self.match(STRING)
-                return (value, (string,))
-            except:
-                try:
-                    integer = self.match(INT)
-                    return (value, (integer,))
-                except:
-                    obj = self.parse_obj()
-                    return (value, (obj,))
+            lb = self.match(LB)
+            return (value, (lb,))
         else:
-            raise SyntaxError("Syntax error: no rule for token: {}".format(self.t))     
-        pass
+            raise SyntaxError("Syntax error: no rule for token: {}".format(self.t))
+
 
 def main():
     from lexer import lex
