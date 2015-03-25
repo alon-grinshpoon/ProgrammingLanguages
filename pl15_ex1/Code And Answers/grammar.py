@@ -79,14 +79,14 @@ def calculate_follow(terminals, nonterminals, grammar, nullable, first):
     while changing:
         changing = False
         for head, body in grammar:
-            n = len(body) + 1
+            n = len(body)
             for i in range(1, n):
                 for j in range(i + 1, n):
-                    if set(body[i:j+1]).issubset(nullable) and first(body[j]) not in follow(body[i]):
-                        follow(body[i]).add(first(body[j]))
+                    if set(body[i:j+1]).issubset(nullable) and first.get(body[j]) not in follow.get(body[i]):
+                        follow[body[i]] = follow.get(body[i]).union(first(body[j]))
                         changing = True
-                    if set(body[i+1:n]).issubset(nullable) and follow(head) not in follow(body[i]):
-                        follow(body[i]).add(follow(head))
+                    if set(body[i+1:n]).issubset(nullable) and follow.get(head) not in follow.get(body[i]):
+                        follow[body[i]] = follow.get(body[i]).union(follow(head))
                         changing = True
     return follow
 
