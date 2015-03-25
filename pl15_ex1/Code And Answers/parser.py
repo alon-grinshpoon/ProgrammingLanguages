@@ -125,18 +125,20 @@ class JsonParser(object):
         pass
 
     def parse_value(self):
-        #
-        # --- CHANGE THE BODY OF THIS FUNCTION ---
-        #        
+        if self.t in [LB]:
+	    try:
+                string = self.match(STRING)
+                return (value, (string,))
+            except:
+                try:
+                    integer = self.match(INT)
+                    return (value, (integer,))
+                except:
+                    obj = self.parse_obj()
+                    return (value, (obj,))
+        else:
+            raise SyntaxError("Syntax error: no rule for token: {}".format(self.t))     
         pass
-
-
-
-
-    #
-    # --- FILL IN MORE parse_XXX FUNCTIONS HERE ---
-    #
-
 
 def main():
     from lexer import lex
