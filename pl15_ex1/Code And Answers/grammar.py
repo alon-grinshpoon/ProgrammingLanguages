@@ -231,15 +231,15 @@ grammar_json__6 = [
 
 
 def main():
-    #analyze_grammar(grammar_recitation)
-    #print
-   #analyze_grammar(grammar_json_4a)
-    #print
-    #analyze_grammar(grammar_json_4b)
-    #print
+    analyze_grammar(grammar_recitation)
+    print
+    analyze_grammar(grammar_json_4a)
+    print
+    analyze_grammar(grammar_json_4b)
+    print
     analyze_grammar(grammar_json_4c)
     print
-    # analyze_grammar(grammar_json_6)
+     #analyze_grammar(grammar_json_6)
     # print
 
     #
