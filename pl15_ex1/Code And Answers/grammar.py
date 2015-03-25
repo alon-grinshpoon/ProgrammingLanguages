@@ -74,9 +74,20 @@ def calculate_follow(terminals, nonterminals, grammar, nullable, first):
     follow = dict()
     for a in nonterminals.union(terminals):
         follow[a] = set()
-    #
-    # --- FILL IN HERE IN QUESTION 1 ---
-    #
+    changing = True
+    while changing:
+        changing = False
+        for head, body in grammar:
+			n = len(body) + 1
+			for i in range(1, n):
+				for j in range(i + 1, n):
+            		if set(body[i:j+1]).issubset(nullable):
+              			follow[body[i]].add(first(body[j]))
+                		changing = True
+					if set(body[i+1:n]).issubset(nullable):
+              			follow[body[i]].add(follow(head))
+                		changing = True
+            pass
     return follow
 
 
@@ -85,9 +96,11 @@ def calculate_select(terminals, nonterminals, grammar, nullable, first, follow):
     Return a dictionary mapping rules to their SELECT (a.k.a. PREDICT) set
     """
     select = dict()
-    #
-    # --- FILL IN HERE IN QUESTION 1 ---
-    #
+    for head, body in grammar:
+		if not (set(body).issubset(nullable):
+			select(head, body) = first(body)
+		else:
+			select(head, body) = first(body).union(follow(body))
     return select
 
 
@@ -171,9 +184,9 @@ grammar_json_4a = [
     (obj, (LB, members, RB)),               # obj-> {members}
     (members, (keyvalue)),             		# members-> keyvalue
     (members, (members, members)),          # members-> members,members
-    (keyvalue, (STRING, COLON, value)),     # keyvalue-> string : value
-    (value, (STRING))						# value -> string
-	(value, (INT))							# value -> int
+    (keyvalue, (string, COLON, value)),     # keyvalue-> string : value
+    (value, (string))						# value -> string
+	(value, (int))							# value -> int
 	(value, (obj))							# value -> obj
 ]
 
