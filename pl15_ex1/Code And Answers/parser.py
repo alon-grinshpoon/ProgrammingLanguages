@@ -75,44 +75,53 @@ class JsonParser(object):
     def parse_obj(self):
         if self.t in [LB]:
             lb = self.match(LB)
-            members = self.parse_members();
-			rb = self.match(RB)
-            return (obj, (lb, members, rb)),
+            first_member = self.parse_first_member();
+	    rb = self.match(RB)
+            return (obj, (lb, first_member, rb))
         else:
             raise SyntaxError("Syntax error: no rule for token: {}".format(self.t))  
         pass    
 
     def parse_first_member(self):
-        #
-        # --- CHANGE THE BODY OF THIS FUNCTION ---
-        #        
+        if self.t in [LB]:
+	    try:
+                members = self.parse_members();
+                return (first_member, (members))
+            except:
+                return (first_member, ())
+        else:
+            raise SyntaxError("Syntax error: no rule for token: {}".format(self.t))     
         pass
 
     def parse_members(self):
         if self.t in [LB]:
-            lb = self.match(LB)
-			try:
-				rb = self.match(RB)
-				return (members, ())
-			except:
-            	keyvalue = self.parse_keyvalue();
-				x = self.parse_value();
-				rb = self.match(RB)
-    			return (members, (keyvalue , x)),  
+            keyvalue = self.parse_keyvalue();
+            X = self.parse_X();
+            return (members, (keyvalue , X))
         else:
             raise SyntaxError("Syntax error: no rule for token: {}".format(self.t))     
         pass
 
     def parse_X(self):
-        #
-        # --- CHANGE THE BODY OF THIS FUNCTION ---
-        #        
+        if self.t in [LB]:
+	    try:
+                comma = self.match(COMMA)
+                members = self.parse_members();
+                return (X, (comma, members))
+            except:
+                return (X, ())
+        else:
+            raise SyntaxError("Syntax error: no rule for token: {}".format(self.t))     
         pass
 
     def parse_keyvalue(self):
-        #
-        # --- CHANGE THE BODY OF THIS FUNCTION ---
-        #        
+        if self.t in [LB]:
+            string = self.match(STRING)
+            colon = self.match(COLON)
+            value = self.parse_value();
+            return (keyvalue, (string, colon, value))
+        else:
+            raise SyntaxError("Syntax error: no rule for token: {}".format(self.t))     
         pass
 
     def parse_value(self):
