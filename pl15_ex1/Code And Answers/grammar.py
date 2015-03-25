@@ -61,10 +61,9 @@ def calculate_first(terminals, nonterminals, grammar, nullable):
         changing = False
         for head, body in grammar:
             for i in range (0,len(body)):
-            	if set(body[0:i]).issubset(nullable) and first(body[i]) not in first(head)
+            	if set(body[0:i]).issubset(nullable) and first(body[i]) not in first(head):
             		first(head).add(first(body[i]))
             		changing = True
-            pass
     return first
 
 
@@ -79,16 +78,15 @@ def calculate_follow(terminals, nonterminals, grammar, nullable, first):
     while changing:
         changing = False
         for head, body in grammar:
-			n = len(body) + 1
-			for i in range(1, n):
-				for j in range(i + 1, n):
-            		if set(body[i:j+1]).issubset(nullable) and first(body[j]) not in follow(body[i]):
-              			follow(body[i]).add(first(body[j]))
-                		changing = True
-					if set(body[i+1:n]).issubset(nullable) and follow(head) not in follow(body[i]):
-              			follow(body[i]).add(follow(head))
-                		changing = True
-            pass
+            n = len(body) + 1
+            for i in range(1, n):
+                for j in range(i + 1, n):
+                    if set(body[i:j+1]).issubset(nullable) and first(body[j]) not in follow(body[i]):
+                        follow(body[i]).add(first(body[j]))
+                        changing = True
+                    if set(body[i+1:n]).issubset(nullable) and follow(head) not in follow(body[i]):
+                        follow(body[i]).add(follow(head))
+                        changing = True
     return follow
 
 
@@ -98,10 +96,10 @@ def calculate_select(terminals, nonterminals, grammar, nullable, first, follow):
     """
     select = dict()
     for head, body in grammar:
-		if not (set(body).issubset(nullable):
-			select(head, body) = first(body)
+		if not set(body).issubset(nullable):
+			select((head, body)).add(first(body))
 		else:
-			select(head, body) = first(body).union(follow(body))
+			select((head, body)).add(first(body).union(follow(body)))
     return select
 
 
