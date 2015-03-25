@@ -61,9 +61,10 @@ def calculate_first(terminals, nonterminals, grammar, nullable):
         changing = False
         for head, body in grammar:
             for i in range (0,len(body)):
-            	if set(body[0:i]).issubset(nullable) and first(body[i]) not in first(head):
-            		first(head).add(first(body[i]))
-            		changing = True
+            	if set(body[0:i]).issubset(nullable):
+                    if not first.get(body[i]).issubset(first.get(head)):
+                        first[head] = (first.get(head)).union(first.get(body[i]))
+                        changing = True
     return first
 
 
@@ -177,17 +178,17 @@ def analyze_grammar(grammar):
     print
 
 
-grammar_json_4a = [
-    (json, (obj, EOF)),                     # json-> obj EOF
-    (obj, (LB, RB)),                     	# obj-> {}
-    (obj, (LB, members, RB)),               # obj-> {members}
-    (members, (keyvalue)),             		# members-> keyvalue
-    (members, (members, members)),          # members-> members,members
-    (keyvalue, (string, COLON, value)),     # keyvalue-> string : value
-    (value, (string))						# value -> string
-	(value, (int))							# value -> int
-	(value, (obj))							# value -> obj
-]
+#grammar_json_4a = [
+#    (json, (obj, EOF)),                     # json-> obj EOF
+#    (obj, (LB, RB)),                     	# obj-> {}
+    #(obj, (LB, members, RB)),               # obj-> {members}
+    #(members, (keyvalue)),             		# members-> keyvalue
+    #(members, (members, members)),          # members-> members,members
+#    (keyvalue, (STRING, COLON, value)),     # keyvalue-> string : value
+    #(value, (STRING))						# value -> string
+#	(value, (INT))							# value -> int
+#	(value, (obj))							# value -> obj
+#]
 
 grammar_json_4b = [
     #
