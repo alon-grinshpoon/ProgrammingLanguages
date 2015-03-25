@@ -99,15 +99,15 @@ def calculate_select(terminals, nonterminals, grammar, nullable, first, follow):
     """
     select = dict()
     for rule in grammar:
-		select[format_rule(rule)] = set()
+		select[rule] = set()
     for rule in grammar:
 		head, body = rule
 		if not set(body).issubset(nullable):
-			select[format_rule(rule)] = select[format_rule(rule)].union(first[body[0]])
+			select[rule] = select[rule].union(first[body[0]])
 		else:
-			select[format_rule(rule)] = select[format_rule(rule)].union(follow[head])
+			select[format_rule(rule)] = select[rule].union(follow[head])
 			if len(body) != 0:
-				select[format_rule(rule)] = select[format_rule(rule)].union(first[body[0]])		
+				select[rule] = select[rule].union(first[body[0]])		
     return select
 
 
@@ -224,16 +224,12 @@ grammar_json__6 = [
 
 
 def main():
-    analyze_grammar(grammar_recitation)
+    #analyze_grammar(grammar_recitation)
+    #print
+   #analyze_grammar(grammar_json_4a)
+    #print
+    analyze_grammar(grammar_json_4b)
     print
-
-    #
-    # --- UNCOMMENT THE FOLLOWING LINES AS YOU PROCEED ---
-    #
-    # analyze_grammar(grammar_json_4a)
-    # print
-    # analyze_grammar(grammar_json_4b)
-    # print
     # analyze_grammar(grammar_json_4c)
     # print
     # analyze_grammar(grammar_json_6)
