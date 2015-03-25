@@ -3,7 +3,7 @@ This file contains the JSON parser.
 """
 
 from symbols import *
-
+import os,sys
 
 class SyntaxError(Exception):
     pass
@@ -145,12 +145,34 @@ def main():
     parse_tree = parser.parse_json()
     dot = tree_to_dot(parse_tree)
     open('json_example.gv', 'w').write(dot)
-
-    #
-    # --- MODIFY HERE TO ADD MORE TEST CASES ---
-    #
-
-
+    
+    print
+    print "Tests Bad Cases:"
+    print 
+    i = 0
+    for f in os.listdir('./bad'):
+        try:
+            i=i+1
+            print "Test #"+str(i)
+            print  "-------"
+            json_example = open('./bad/'+f).read()
+            print json_example
+            tokens = lex(json_example)
+            parser = JsonParser(tokens)
+            parse_tree = parser.parse_json()
+            dot = tree_to_dot(parse_tree)
+            open('json_example.gv', 'w').write(dot)
+            print
+        except SyntaxError as e1:
+            print str(e1)
+            print
+            pass
+        except Exception as e2:
+            print str(e1)
+            print
+            pass
+    sys.exit(1)
+    
 
 if __name__ == '__main__':
     main()

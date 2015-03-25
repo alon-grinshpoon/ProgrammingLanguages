@@ -192,9 +192,9 @@ grammar_json_4a = [
     (members, (keyvalue, )),                # members-> keyvalue
     (members, (members, COMMA, members)),   # members-> members,members
     (keyvalue, (STRING, COLON, value)),     # keyvalue-> string : value
-    (value, (STRING,)),			    # value -> string
-    (value, (INT,)),		            # value -> int
-    (value, (obj,))			    # value -> obj
+    (value, (STRING,)),			            # value -> string
+    (value, (INT,)),		                # value -> int
+    (value, (obj,))			                # value -> obj
 ]
 
 grammar_json_4b = [
@@ -202,8 +202,9 @@ grammar_json_4b = [
     (obj, (LB, first_member, RB)),          # obj-> {first_member}
     (first_member, ()),                     # first_member-> epsilon
     (first_member, (members,)),             # first_member-> members
-    (members, (keyvalue,)),                 # members-> keyvalue
-    (members, (keyvalue, COMMA, members)),  # members-> keyvalue, members
+    (members, (keyvalue, X)),               # members-> keyvalue X
+    (X, (COMMA, members)),                  # X-> , members X
+    (X, ()),                                # X-> epsilon
     (keyvalue, (STRING, COLON, value)),     # keyvalue-> string : value
     (value, (STRING,)),                     # value -> string
     (value, (INT,)),                        # value -> int
