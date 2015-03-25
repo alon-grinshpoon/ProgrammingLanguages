@@ -171,9 +171,9 @@ grammar_json_4a = [
     (obj, (LB, members, RB)),               # obj-> {members}
     (members, (keyvalue)),             		# members-> keyvalue
     (members, (members, members)),          # members-> members,members
-    (keyvalue, (string, COLON, value)),     # keyvalue-> string : value
-    (value, (string))						# value -> string
-	(value, (int))							# value -> int
+    (keyvalue, (STRING, COLON, value)),     # keyvalue-> string : value
+    (value, (STRING))						# value -> string
+	(value, (INT))							# value -> int
 	(value, (obj))							# value -> obj
 ]
 
