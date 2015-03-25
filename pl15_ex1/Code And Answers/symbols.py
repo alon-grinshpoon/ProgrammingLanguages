@@ -23,6 +23,9 @@ value = 'value'
 X = 'X'
 member = 'members'
 array = 'array'
+Y = 'Y'
+array_vals = 'array_vals'
+first='first'
 
 # terminals for the grammar from the recitation
 LP = 'LP'          # (

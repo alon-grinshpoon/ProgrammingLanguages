@@ -224,9 +224,25 @@ grammar_json_4c = [
     (value, (obj,))                         # value -> obj
 ]
 
-
 grammar_json_6 = [
-
+    (json, (obj, EOF)),                     # json-> obj EOF
+    (obj, (LB, first_member, RB)),          # obj-> {first_member}
+    (first_member, ()),                     # first_member-> epsilon
+    (first_member, (members)),              # first_member-> members
+    (members, (keyvalue, X)),               # members-> keyvalue X
+    (X, (COMMA, members)),                  # X-> , members X
+    (X, ()),                                # X-> epsilon
+    (keyvalue, (STRING, COLON, value)),     # keyvalue-> string : value
+    (value, (STRING,)),                     # value -> string
+    (value, (INT,)),                        # value -> int
+    (value, (obj,)),                        # value -> obj
+    (value, (array,)),                      # value -> array
+    (array, (LP, first ,RP)),               # array -> [first]
+    (first, ()),                            # first -> epsilon
+    (first, (array_vals,)),                 # first -> array_vals
+    (array_vals, (value, Y)),               # arrat_vals -> value Y
+    (Y, ()),                                # Y -> epsilon
+    (Y, (COMMA, array_vals))                # Y -> , array_vals
 ]
 
 
