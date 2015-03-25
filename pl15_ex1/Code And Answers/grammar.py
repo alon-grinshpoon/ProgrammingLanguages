@@ -60,8 +60,8 @@ def calculate_first(terminals, nonterminals, grammar, nullable):
     while changing:
         changing = False
         for head, body in grammar:
-            for i in range (0,len(body)):
-            	if set(body[0:i]).issubset(nullable):
+            for i in range (0,len(body)-1):
+            	if set(body[0:i+1]).issubset(nullable):
                     if not first.get(body[i]).issubset(first.get(head)):
                         first[head] = (first.get(head)).union(first.get(body[i]))
                         changing = True
@@ -80,14 +80,16 @@ def calculate_follow(terminals, nonterminals, grammar, nullable, first):
         changing = False
         for head, body in grammar:
             n = len(body)
-            for i in range(1, n):
-                for j in range(i + 1, n):
-                    if set(body[i:j+1]).issubset(nullable) and first.get(body[j]) not in follow.get(body[i]):
-                        follow[body[i]] = follow.get(body[i]).union(first(body[j]))
-                        changing = True
-                    if set(body[i+1:n]).issubset(nullable) and follow.get(head) not in follow.get(body[i]):
-                        follow[body[i]] = follow.get(body[i]).union(follow(head))
-                        changing = True
+            for i in range(0, n):
+                for j in range(i+1, n):
+                    if set(body[i+1:j+1]).issubset(nullable):
+                        if not first[body[j]].issubset(follow[body[i]]):
+                            follow[body[i]] = follow[body[i]].union(first[body[j]])
+                            changing = True
+                    if set(body[i+1:n]).issubset(nullable):
+                        if not follow[head].issubset(follow[body[i]]):
+                            follow[body[i]] = follow[body[i]].union(follow[head])
+                            changing = True
     return follow
 
 
@@ -186,8 +188,8 @@ grammar_json_4a = [
     (members, (members, members)),          # members-> members,members
     (keyvalue, (STRING, COLON, value)),     # keyvalue-> string : value
     (value, (STRING))						# value -> string
-	(value, (INT))							# value -> int
-	(value, (obj))							# value -> obj
+#	(value, (INT))							# value -> int
+#	(value, (obj))							# value -> obj
 ]
 
 grammar_json_4b = [
