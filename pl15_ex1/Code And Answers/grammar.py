@@ -60,8 +60,8 @@ def calculate_first(terminals, nonterminals, grammar, nullable):
     while changing:
         changing = False
         for head, body in grammar:
-            for i in range (0,len(body)-1):
-            	if set(body[0:i+1]).issubset(nullable):
+            for i in range (0,len(body)):
+            	if set(body[0:i]).issubset(nullable):
                     if not first.get(body[i]).issubset(first.get(head)):
                         first[head] = (first.get(head)).union(first.get(body[i]))
                         changing = True
