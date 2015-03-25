@@ -135,8 +135,7 @@ class JsonParser(object):
             return (value, (integer,))
         if self.t in [LB]:
             c = self.parse_obj();
-
-            return (value, (lb,))
+            return (value, (c,))
         else:
             raise SyntaxError("Syntax error: no rule for token: {}".format(self.t))
 
