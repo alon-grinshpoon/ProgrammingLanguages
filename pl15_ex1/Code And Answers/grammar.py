@@ -103,9 +103,9 @@ def calculate_select(terminals, nonterminals, grammar, nullable, first, follow):
     for rule in grammar:
 		head, body = rule
 		if not set(body).issubset(nullable):
-			select[rule] = select[rule].union(first[body[0]])
+			select[rule] = first[body[0]]
 		else:
-			select[format_rule(rule)] = select[rule].union(follow[head])
+			select[rule] = select[rule].union(follow[head])
 			if len(body) != 0:
 				select[rule] = select[rule].union(first[body[0]])		
     return select
@@ -187,22 +187,22 @@ def analyze_grammar(grammar):
 
 grammar_json_4a = [
     (json, (obj, EOF)),                     # json-> obj EOF
-    (obj, (LB, RB)),                     	# obj-> {}
+    (obj, (LB, RB)),                        # obj-> {}
     (obj, (LB, members, RB)),               # obj-> {members}
-    (members, (keyvalue, )),             		# members-> keyvalue
+    (members, (keyvalue, )),                # members-> keyvalue
     (members, (members, COMMA, members)),   # members-> members,members
     (keyvalue, (STRING, COLON, value)),     # keyvalue-> string : value
-    (value, (STRING,)),						# value -> string
-	(value, (INT,)),						# value -> int
-	(value, (obj,))							# value -> obj
+    (value, (STRING,)),			    # value -> string
+    (value, (INT,)),		            # value -> int
+    (value, (obj,))			    # value -> obj
 ]
 
 grammar_json_4b = [
     (json, (obj, EOF)),                     # json-> obj EOF
     (obj, (LB, first_member, RB)),          # obj-> {first_member}
     (first_member, ()),                     # first_member-> epsilon
-    (first_member, (members,)),              # first_member-> members
-    (members, (keyvalue,)),                  # members-> keyvalue
+    (first_member, (members,)),             # first_member-> members
+    (members, (keyvalue,)),                 # members-> keyvalue
     (members, (keyvalue, COMMA, members)),  # members-> keyvalue, members
     (keyvalue, (STRING, COLON, value)),     # keyvalue-> string : value
     (value, (STRING,)),                     # value -> string
@@ -214,7 +214,7 @@ grammar_json_4c = [
     (json, (obj, EOF)),                     # json-> obj EOF
     (obj, (LB, first_member, RB)),          # obj-> {first_member}
     (first_member, ()),                     # first_member-> epsilon
-    (first_member, (members,)),              # first_member-> members
+    (first_member, (members,)),             # first_member-> members
     (members, (keyvalue, X)),               # members-> keyvalue X
     (X, (COMMA, members)),                  # X-> , members X
     (X, ()),                                # X-> epsilon
