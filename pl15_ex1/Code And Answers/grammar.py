@@ -82,14 +82,14 @@ def calculate_follow(terminals, nonterminals, grammar, nullable, first):
             n = len(body)
             for i in range(0, n):
                 for j in range(i+1, n):
-                    if set(body[i+1:j+1]).issubset(nullable):
+                    if i+1 == j or set(body[i+1:j]).issubset(nullable):
                         if not first[body[j]].issubset(follow[body[i]]):
                             follow[body[i]] = follow[body[i]].union(first[body[j]])
                             changing = True
-                    if set(body[i+1:n]).issubset(nullable):
-                        if not follow[head].issubset(follow[body[i]]):
-                            follow[body[i]] = follow[body[i]].union(follow[head])
-                            changing = True
+                if set(body[i+1:n]).issubset(nullable):
+                    if not follow[head].issubset(follow[body[i]]):
+                       follow[body[i]] = follow[body[i]].union(follow[head])
+                       changing = True
     return follow
 
 
@@ -98,11 +98,12 @@ def calculate_select(terminals, nonterminals, grammar, nullable, first, follow):
     Return a dictionary mapping rules to their SELECT (a.k.a. PREDICT) set
     """
     select = dict()
-    for head, body in grammar:
+    for rule in grammar:
+		head, body = rule
 		if not set(body).issubset(nullable):
-			select((head, body)).add(first(body))
+			select[format_rule(rule)] = select[format_rule(rule)].union(first[body])
 		else:
-			select((head, body)).add(first(body).union(follow(body)))
+			select[format_rule(rule)] = select[format_rule(rule)].union(first[body].union(follow[body]))
     return select
 
 
