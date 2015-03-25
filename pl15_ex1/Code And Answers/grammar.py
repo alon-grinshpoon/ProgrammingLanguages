@@ -199,12 +199,12 @@ grammar_json_4a = [
 
 grammar_json_4b = [
     (json, (obj, EOF)),                     # json-> obj EOF
-    (obj, (LB, first_member, RB)),          # obj-> {first_member}
-    (first_member, ()),                     # first_member-> epsilon
-    (first_member, (members,)),             # first_member-> members
+    (obj, (LB, Y)),                         # obj-> {Y
+    (Y, (RB)),                              # Y-> }
+    (Y, (members, RB)),                     # Y-> members}
     (members, (keyvalue, X)),               # members-> keyvalue X
-    (X, (COMMA, members)),                  # X-> , members X
     (X, ()),                                # X-> epsilon
+    (X, (COMMA, members)),                  # X-> , members
     (keyvalue, (STRING, COLON, value)),     # keyvalue-> string : value
     (value, (STRING,)),                     # value -> string
     (value, (INT,)),                        # value -> int
