@@ -82,7 +82,7 @@ def calculate_follow(terminals, nonterminals, grammar, nullable, first):
             n = len(body)
             for i in range(0, n):
                 for j in range(i+1, n):
-                    if set(body[i+1:j+1]).issubset(nullable):
+                    if set(body[i+1:j]).issubset(nullable):
                         if not first[body[j]].issubset(follow[body[i]]):
                             follow[body[i]] = follow[body[i]].union(first[body[j]])
                             changing = True
@@ -90,6 +90,7 @@ def calculate_follow(terminals, nonterminals, grammar, nullable, first):
                         if not follow[head].issubset(follow[body[i]]):
                             follow[body[i]] = follow[body[i]].union(follow[head])
                             changing = True
+
     return follow
 
 
@@ -187,15 +188,21 @@ grammar_json_4a = [
     (members, (keyvalue)),             		# members-> keyvalue
     (members, (members, members)),          # members-> members,members
     (keyvalue, (STRING, COLON, value)),     # keyvalue-> string : value
-    (value, (STRING))						# value -> string
-#	(value, (INT))							# value -> int
-#	(value, (obj))							# value -> obj
+    (value, (STRING,)),						# value -> string
+	(value, (INT,)),						# value -> int
+	(value, (obj,))							# value -> obj
 ]
 
 grammar_json_4b = [
-    #
-    # --- FILL IN HERE IN QUESTION 4.b ---
-    #
+    (json, (obj, EOF)),                     # json-> obj EOF
+    (obj, (LB, RB)),                        # obj-> {}
+    (obj, (LB, members, RB)),               # obj-> {members}
+    (members, (keyvalue)),                  # members-> keyvalue
+    (members, (members, keyvalue)),         # members-> members, keyvalue
+    (keyvalue, (STRING, COLON, value)),     # keyvalue-> string : value
+    (value, (STRING,)),                     # value -> string
+    (value, (INT,)),                        # value -> int
+    (value, (obj,))                         # value -> obj
 ]
 
 grammar_json_4c = [
