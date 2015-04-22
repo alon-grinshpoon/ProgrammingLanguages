@@ -34,20 +34,20 @@ def nos(S, s):
         spp = nos(S.S2, sp)
         return spp
 
-    elif type(S) is If and eval_bool_expr(S.b, s) is tt:
+    elif type(S) is If and eval_bool_expr(S.b, s) == tt:
         sp = nos(S.S1, s)
         return sp
 
-    elif type(S) is If and eval_bool_expr(S.b, s) is ff:
+    elif type(S) is If and eval_bool_expr(S.b, s) == ff:
         sp = nos(S.S2, s)
         return sp
 
-    elif type(S) is While and eval_bool_expr(S.b, s) is tt:
+    elif type(S) is While and eval_bool_expr(S.b, s) == tt:
         sp = nos(S.S, s)
         spp = nos(While(S.b, S.S), sp)
         return spp
 
-    elif type(S) is While and eval_bool_expr(S.b, s) is ff:
+    elif type(S) is While and eval_bool_expr(S.b, s) == ff:
         return s
 
     else:
@@ -55,22 +55,14 @@ def nos(S, s):
 
 
 if __name__ == '__main__':
+    """
     prog = Comp(Assign('y', ALit(1)),
                 While(Not(Eq(Var('x'), ALit(1))),
                       Comp(Assign('y', Times(Var('y'), Var('x'))),
                            Assign('x', Minus(Var('x'), ALit(1))))))
 
     print nos(prog, {'x': 5})
-
-    a = 84
-    b = 30
-    while (b != 0):
-        t=b
-        b=a % b
-        a=t
-    
-
-    print "Expected: a= "+ str(a) +", b="+ str(b) + "\nRecived:"
+    """
 
     prog2 = Comp(Assign('a', ALit(84)),
                  Comp(Assign('b', ALit(30)),
@@ -81,6 +73,3 @@ if __name__ == '__main__':
 
     print nos(prog2, {})
 
-    #
-    # --- ADD MORE TESTS HERE ---
-    #

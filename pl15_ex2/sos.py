@@ -40,10 +40,10 @@ def sos(S, s):
             sp = gamma
             return (S.S2, sp)
 
-    elif type(S) is If and eval_bool_expr(S.b, s) is tt:
+    elif type(S) is If and eval_bool_expr(S.b, s) == tt:
         return (S.S1, s)
 
-    elif type(S) is If and eval_bool_expr(S.b, s) is ff:
+    elif type(S) is If and eval_bool_expr(S.b, s) == ff:
         return (S.S2, s)
 
     elif type(S) is While:
@@ -68,13 +68,19 @@ def run_sos(S, s):
 
 
 if __name__ == '__main__':
+    """
     prog = Comp(Assign('y', ALit(1)),
                 While(Not(Eq(Var('x'), ALit(1))),
                       Comp(Assign('y', Times(Var('y'), Var('x'))),
                            Assign('x', Minus(Var('x'), ALit(1))))))
 
     run_sos(prog, {'x': 5})
+    """
+    prog2 = Comp(Assign('a', ALit(84)),
+                 Comp(Assign('b', ALit(30)),
+                      While(Not(Eq(Var('b'), ALit(0))),
+                            Comp(Assign('t', Var('b')),
+                                 Comp(Assign('b', Mod(Var('a'), Var('b'))),
+                                 Assign('a', Var('t')))))))
 
-    #
-    # --- ADD MORE TESTS HERE ---
-    #
+    run_sos(prog2, {})

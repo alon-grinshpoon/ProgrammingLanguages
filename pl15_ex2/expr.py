@@ -74,17 +74,17 @@ def eval_bool_expr(e, s):
 
 
     elif type(e) is Not:
-        if not eval_bool_expr(e.b, s):
+        if not eval_bool_expr(e.b, s) == tt:
             return tt
         return ff
 
     elif type(e) is And:
-        if eval_bool_expr(e.b1, s) and eval_bool_expr(e.b2, s):
+        if eval_bool_expr(e.b1, s) == tt and eval_bool_expr(e.b2, s) == tt:
             return tt
         return ff
 
     elif type(e) is Or:
-        if eval_bool_expr(e.b1, s) or eval_bool_expr(e.b2, s):
+        if eval_bool_expr(e.b1, s) == tt or eval_bool_expr(e.b2, s) == tt:
             return tt
         return ff
 
@@ -106,7 +106,6 @@ def main():
     print b
     print eval_bool_expr(b, {'x':10})
     print
-
 
     #
     # --- ADD MORE TESTS HERE ---

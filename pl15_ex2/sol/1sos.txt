@@ -1,0 +1,41 @@
+<a := 84 ; b := 30 ; while (Not(Eq(b, 0))) do (t := b ; b := Mod(a, b) ; a := t), {}> ==>
+
+<b := 30 ; while (Not(Eq(b, 0))) do (t := b ; b := Mod(a, b) ; a := t), {'a': 84}> ==>
+
+<while (Not(Eq(b, 0))) do (t := b ; b := Mod(a, b) ; a := t), {'a': 84, 'b': 30}> ==>
+
+<if (Not(Eq(b, 0))) then (t := b ; b := Mod(a, b) ; a := t ; while (Not(Eq(b, 0))) do (t := b ; b := Mod(a, b) ; a := t)) else (skip), {'a': 84, 'b': 30}> ==>
+
+<t := b ; b := Mod(a, b) ; a := t ; while (Not(Eq(b, 0))) do (t := b ; b := Mod(a, b) ; a := t), {'a': 84, 'b': 30}> ==>
+
+<b := Mod(a, b) ; a := t ; while (Not(Eq(b, 0))) do (t := b ; b := Mod(a, b) ; a := t), {'a': 84, 'b': 30, 't': 30}> ==>
+
+<a := t ; while (Not(Eq(b, 0))) do (t := b ; b := Mod(a, b) ; a := t), {'a': 84, 'b': 24, 't': 30}> ==>
+
+<while (Not(Eq(b, 0))) do (t := b ; b := Mod(a, b) ; a := t), {'a': 30, 'b': 24, 't': 30}> ==>
+
+<if (Not(Eq(b, 0))) then (t := b ; b := Mod(a, b) ; a := t ; while (Not(Eq(b, 0))) do (t := b ; b := Mod(a, b) ; a := t)) else (skip), {'a': 30, 'b': 24, 't': 30}> ==>
+
+<t := b ; b := Mod(a, b) ; a := t ; while (Not(Eq(b, 0))) do (t := b ; b := Mod(a, b) ; a := t), {'a': 30, 'b': 24, 't': 30}> ==>
+
+<b := Mod(a, b) ; a := t ; while (Not(Eq(b, 0))) do (t := b ; b := Mod(a, b) ; a := t), {'a': 30, 'b': 24, 't': 24}> ==>
+
+<a := t ; while (Not(Eq(b, 0))) do (t := b ; b := Mod(a, b) ; a := t), {'a': 30, 'b': 6, 't': 24}> ==>
+
+<while (Not(Eq(b, 0))) do (t := b ; b := Mod(a, b) ; a := t), {'a': 24, 'b': 6, 't': 24}> ==>
+
+<if (Not(Eq(b, 0))) then (t := b ; b := Mod(a, b) ; a := t ; while (Not(Eq(b, 0))) do (t := b ; b := Mod(a, b) ; a := t)) else (skip), {'a': 24, 'b': 6, 't': 24}> ==>
+
+<t := b ; b := Mod(a, b) ; a := t ; while (Not(Eq(b, 0))) do (t := b ; b := Mod(a, b) ; a := t), {'a': 24, 'b': 6, 't': 24}> ==>
+
+<b := Mod(a, b) ; a := t ; while (Not(Eq(b, 0))) do (t := b ; b := Mod(a, b) ; a := t), {'a': 24, 'b': 6, 't': 6}> ==>
+
+<a := t ; while (Not(Eq(b, 0))) do (t := b ; b := Mod(a, b) ; a := t), {'a': 24, 'b': 0, 't': 6}> ==>
+
+<while (Not(Eq(b, 0))) do (t := b ; b := Mod(a, b) ; a := t), {'a': 6, 'b': 0, 't': 6}> ==>
+
+<if (Not(Eq(b, 0))) then (t := b ; b := Mod(a, b) ; a := t ; while (Not(Eq(b, 0))) do (t := b ; b := Mod(a, b) ; a := t)) else (skip), {'a': 6, 'b': 0, 't': 6}> ==>
+
+<skip, {'a': 6, 'b': 0, 't': 6}> ==>
+
+{'a': 6, 'b': 0, 't': 6}

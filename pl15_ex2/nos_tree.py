@@ -35,26 +35,26 @@ def nos_tree(S, s):
         premises = (t1, t2)
         post_state = spp
 
-    elif type(S) is If and eval_bool_expr(S.b, s) is tt:
+    elif type(S) is If and eval_bool_expr(S.b, s) == tt:
         rule = 'if_tt'
         sp, t = nos_tree(S.S1, s)
         premises = (t, )
         post_state = sp
 
-    elif type(S) is If and eval_bool_expr(S.b, s) is ff:
+    elif type(S) is If and eval_bool_expr(S.b, s) == ff:
         rule = 'if_ff'
         sp, t = nos_tree(S.S2, s)
         premises = (t, )
         post_state = sp
 
-    elif type(S) is While and eval_bool_expr(S.b, s) is tt:
+    elif type(S) is While and eval_bool_expr(S.b, s) == tt:
         rule = 'while_tt'
         sp, t1 = nos_tree(S.S, s)
         spp, t2 = nos_tree(While(S.b, S.S), sp)
         premises = (t1, t2)
         post_state = spp
 
-    elif type(S) is While and eval_bool_expr(S.b, s) is ff:
+    elif type(S) is While and eval_bool_expr(S.b, s) == ff:
         rule = 'while_ff'
         premises = ()
         post_state = s
@@ -66,8 +66,10 @@ def nos_tree(S, s):
 
 
 if __name__ == '__main__':
+    
     from tree_to_dot import view_tree
 
+    """
     prog = Comp(Assign('y', ALit(1)),
                 While(Not(Eq(Var('x'), ALit(1))),
                       Comp(Assign('y', Times(Var('y'), Var('x'))),
@@ -79,6 +81,19 @@ if __name__ == '__main__':
     print tree
     print
     view_tree(tree)
+    """
+
+    prog2 = Comp(Assign('a', ALit(84)),
+                 Comp(Assign('b', ALit(30)),
+                      While(Not(Eq(Var('b'), ALit(0))),
+                            Comp(Assign('t', Var('b')),
+                                 Comp(Assign('b', Mod(Var('a'), Var('b'))),
+                                 Assign('a', Var('t')))))))
+
+    s, tree = nos_tree(prog2, {})
+    print tree
+    view_tree(tree)
+    #print s
 
     #
     # --- ADD MORE TESTS HERE ---
