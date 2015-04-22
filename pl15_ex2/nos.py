@@ -34,20 +34,20 @@ def nos(S, s):
         spp = nos(S.S2, sp)
         return spp
 
-    elif type(S) is If and eval_bool_expr(S.b, s) is True:
+    elif type(S) is If and eval_bool_expr(S.b, s) is tt:
         sp = nos(S.S1, s)
         return sp
 
-    elif type(S) is If and eval_bool_expr(S.b, s) is False:
+    elif type(S) is If and eval_bool_expr(S.b, s) is ff:
         sp = nos(S.S2, s)
         return sp
 
-    elif type(S) is While and eval_bool_expr(S.b, s) is True:
+    elif type(S) is While and eval_bool_expr(S.b, s) is tt:
         sp = nos(S.S, s)
         spp = nos(While(S.b, S.S), sp)
         return spp
 
-    elif type(S) is While and eval_bool_expr(S.b, s) is False:
+    elif type(S) is While and eval_bool_expr(S.b, s) is ff:
         return s
 
     else:
@@ -61,6 +61,25 @@ if __name__ == '__main__':
                            Assign('x', Minus(Var('x'), ALit(1))))))
 
     print nos(prog, {'x': 5})
+
+    a = 84
+    b = 30
+    while (b != 0):
+        t=b
+        b=a % b
+        a=t
+    
+
+    print "Expected: a= "+ str(a) +", b="+ str(b) + "\nRecived:"
+
+    prog2 = Comp(Assign('a', ALit(84)),
+                 Comp(Assign('b', ALit(30)),
+                      While(Not(Eq(Var('b'), ALit(0))),
+                            Comp(Assign('t', Var('b')),
+                                 Comp(Assign('b', Mod(Var('a'), Var('b'))),
+                                 Assign('a', Var('t')))))))
+
+    print nos(prog2, {})
 
     #
     # --- ADD MORE TESTS HERE ---

@@ -1,0 +1,249 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"Q",
+				"Question"
+			],
+			[
+				"a",
+				"admin"
+			],
+			[
+				"0x0",
+				"0x0"
+			],
+			[
+				"_",
+				"_COND"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "Packages/Python/Python.sublime-build",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Packages/Python/Python.sublime-build",
+					""
+				],
+				[
+					"Packages/Python/Python.sublime-build",
+					"Syntax Check"
+				]
+			],
+			[
+				"Packages/Python/Python.sublime-build",
+				"Syntax Check"
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"packa",
+				"Package Control: Install Package"
+			],
+			[
+				"Package",
+				"Preferences: Browse Packages"
+			]
+		],
+		"width": 400.0
+	},
+	"console":
+	{
+		"height": 128.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '2deb499853c4371624f5a07e27c334aa' + 'bf8c4e67d14fb0525ba4f89698a6d7e1'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/C/Users/Rony/Documents/GitHub/ProgrammingLanguages"
+	],
+	"file_history":
+	[
+		"/C/Users/Rony/Documents/GitHub/ProgrammingLanguages/pl15_ex2/ex2_sublime_proj.sublime-project",
+		"/C/Users/Rony/Documents/GitHub/ProgrammingLanguages/pl15_ex2/expr.py",
+		"/C/Users/Rony/Documents/GitHub/testgit/Git.txt",
+		"/C/Users/Rony/Documents/GitHub/testgit/Test.py",
+		"/C/Users/Rony/Documents/GitHub/testgit/fbijbxpm.d4i.txt",
+		"/C/Users/Rony/Documents/GitHub/testgit/hzyslywp.ym3.txt",
+		"/C/Users/Rony/Documents/GitHub/testgit/edovl3ho.geg.txt",
+		"/C/Users/Rony/Documents/GitHub/testgit/c0vhueli.jbd.txt",
+		"/C/Users/Rony/Documents/GitHub/testgit/dxytwkni.hp1.txt",
+		"/C/Users/Rony/Documents/GitHub/Django/onTheFly/onTheFly/settings.py",
+		"/C/Users/Rony/Documents/GitHub/Django/onTheFly/feed/models.py",
+		"/C/Users/Rony/Documents/GitHub/Django/onTheFly/people/models.py",
+		"/C/Users/Rony/Documents/GitHub/Django/newSite/polls/admin.py",
+		"/C/Users/Rony/Documents/GitHub/testgit/GameOfLife.py",
+		"/C/Users/Rony/Documents/GitHub/Django/newSite/polls/views.py",
+		"/C/Users/Rony/Documents/GitHub/Django/newSite/polls/static/polls/style.css",
+		"/C/Users/Rony/Documents/GitHub/Django/newSite/polls/urls.py",
+		"/C/Users/Rony/Documents/GitHub/Django/newSite/polls/templates/polls/results.html",
+		"/C/Users/Rony/Documents/GitHub/Django/newSite/polls/templates/polls/index.html",
+		"/C/Users/Rony/Documents/GitHub/Django/newSite/polls/templates/polls/detail.html",
+		"/C/Users/Rony/Documents/GitHub/Django/newSite/polls/templates/polls/static/polls/style.css",
+		"/C/Users/Rony/Documents/GitHub/Django/newSite/newSite/urls.py",
+		"/C/Users/Rony/Documents/GitHub/Django/newSite/newSite/settings.py",
+		"/C/Users/Rony/Documents/GitHub/Django/newSite/templates/admin/base_site.html",
+		"/C/Users/Rony/Documents/GitHub/Django/newSite/polls/models.py"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"BASE_DIR",
+			" 0x7\nG3:       dc 0x8\nG4:       dc 0x9\nG5:       dc \nG6:       dc 0xB\nG7:       dc 0xC\nl:        dc 0xD\nGl:       dc",
+			"dc",
+			"0xE",
+			" \n",
+			"0xA",
+			"0xD",
+			"	",
+			"\\t",
+			"vm"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"    "
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 27.0
+	},
+	"input":
+	{
+		"height": 35.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 124.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "pl_subl_proj_.sublime-project",
+	"replace":
+	{
+		"height": 50.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 219.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

@@ -39,6 +39,12 @@ def eval_arith_expr(e, s):
     elif type(e) is Minus:
         return eval_arith_expr(e.a1, s) - eval_arith_expr(e.a2, s)
 
+    elif type(e) is Div:
+        return eval_arith_expr(e.a1, s) / eval_arith_expr(e.a2, s)
+
+    elif type(e) is Mod:
+        return eval_arith_expr(e.a1, s) % eval_arith_expr(e.a2, s)
+
     else:
         assert False # Error
 
@@ -57,25 +63,36 @@ def eval_bool_expr(e, s):
         return e.value
 
     elif type(e) is Eq:
-        return eval_arith_expr(e.a1, s) == eval_arith_expr(e.a2, s)
+        if eval_arith_expr(e.a1, s) == eval_arith_expr(e.a2, s):
+            return tt
+        return ff
 
     elif type(e) is LE:
-        return eval_arith_expr(e.a1, s) <= eval_arith_expr(e.a2, s)
+        if eval_arith_expr(e.a1, s) <= eval_arith_expr(e.a2, s):
+            return tt
+        return ff
+
 
     elif type(e) is Not:
-        return not eval_bool_expr(e.b, s)
+        if not eval_bool_expr(e.b, s):
+            return tt
+        return ff
 
     elif type(e) is And:
-        return eval_bool_expr(e.b1, s) and eval_bool_expr(e.b2, s)
+        if eval_bool_expr(e.b1, s) and eval_bool_expr(e.b2, s):
+            return tt
+        return ff
 
     elif type(e) is Or:
-        return eval_bool_expr(e.b1, s) or eval_bool_expr(e.b2, s)
+        if eval_bool_expr(e.b1, s) or eval_bool_expr(e.b2, s):
+            return tt
+        return ff
 
     else:
         assert False # Error
 
 
-if __name__ == '__main__':
+def main():
     # (x + 1) * (x - 1)
     a = Times(Plus(Var('x'), ALit(1)), Minus(Var('x'), ALit(1)))
 
@@ -84,13 +101,16 @@ if __name__ == '__main__':
     print
 
     b = And(LE(ALit(1), ALit(2)),
-            Not(BLit(False)))
+            Not(BLit(ff)))
 
     print b
     print eval_bool_expr(b, {'x':10})
     print
 
+
     #
     # --- ADD MORE TESTS HERE ---
     #
 
+if __name__ == '__main__':
+    main()
