@@ -69,6 +69,7 @@ if __name__ == '__main__':
     
     from tree_to_dot import view_tree
 
+
     """
     prog = Comp(Assign('y', ALit(1)),
                 While(Not(Eq(Var('x'), ALit(1))),
@@ -83,6 +84,8 @@ if __name__ == '__main__':
     view_tree(tree)
     """
 
+
+
     prog2 = Comp(Assign('a', ALit(84)),
                  Comp(Assign('b', ALit(30)),
                       While(Not(Eq(Var('b'), ALit(0))),
@@ -93,7 +96,7 @@ if __name__ == '__main__':
     s, tree = nos_tree(prog2, {})
     print tree
     view_tree(tree)
-    #print s
+    
 
     #
     # --- ADD MORE TESTS HERE ---
