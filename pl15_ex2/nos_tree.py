@@ -59,6 +59,17 @@ def nos_tree(S, s):
         premises = ()
         post_state = s
 
+    elif type(S) is Repeat:
+        rule = 'repeat_tt'
+        sp, t = nos_tree(S.S, s)
+        premises = (t, )
+        post_state = sp
+        if eval_bool_expr(S.b, sp) == ff:
+            rule = 'repeat_ff'
+            spp, t2 =  nos_tree(Repeat(S.S, S.b), sp)
+            premises = (t, t2)
+            post_state = spp
+
     else:
         assert False # Error
 
@@ -68,9 +79,7 @@ def nos_tree(S, s):
 if __name__ == '__main__':
     
     from tree_to_dot import view_tree
-
-
-    """
+    
     prog = Comp(Assign('y', ALit(1)),
                 While(Not(Eq(Var('x'), ALit(1))),
                       Comp(Assign('y', Times(Var('y'), Var('x'))),
@@ -82,10 +91,8 @@ if __name__ == '__main__':
     print tree
     print
     view_tree(tree)
-    """
-
-
-
+    
+    # Q1d
     prog2 = Comp(Assign('a', ALit(84)),
                  Comp(Assign('b', ALit(30)),
                       While(Not(Eq(Var('b'), ALit(0))),
@@ -96,7 +103,17 @@ if __name__ == '__main__':
     s, tree = nos_tree(prog2, {})
     print tree
     view_tree(tree)
-    
+
+    # Check Q3.c
+    prog3 = Repeat(Assign('x', Minus(Var('x'),ALit(10))), LE(Var('x'), ALit(9)))
+    s, tree = nos_tree(prog3, {'x':55})
+    print tree
+    view_tree(tree)
+
+    s, tree = nos_tree(prog3, {'x':7})
+    print tree
+    view_tree(tree)
+
 
     #
     # --- ADD MORE TESTS HERE ---

@@ -106,7 +106,7 @@ class JsonParser(object):
             members = self.parse_members()
             return (X, (comma, members))
         elif self.t in [RB]:
-            return (first_member, ())
+            return (X, ())
         raise SyntaxError("Syntax error: no rule for token: {}".format(self.t))
 
 
