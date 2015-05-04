@@ -103,7 +103,8 @@ if __name__ == '__main__':
     s, tree = nos_tree(prog2, {})
     print tree
     view_tree(tree)
-
+    
+    """
     # Check Q3.c
     prog3 = Repeat(Assign('x', Minus(Var('x'),ALit(10))), LE(Var('x'), ALit(9)))
     s, tree = nos_tree(prog3, {'x':55})
@@ -113,7 +114,7 @@ if __name__ == '__main__':
     s, tree = nos_tree(prog3, {'x':7})
     print tree
     view_tree(tree)
-
+    """
 
     #
     # --- ADD MORE TESTS HERE ---

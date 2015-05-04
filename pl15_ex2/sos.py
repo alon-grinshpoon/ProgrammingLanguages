@@ -71,7 +71,7 @@ def run_sos(S, s):
 
 
 if __name__ == '__main__':
-    """
+    
     prog = Comp(Assign('y', ALit(1)),
                 While(Not(Eq(Var('x'), ALit(1))),
                       Comp(Assign('y', Times(Var('y'), Var('x'))),
@@ -87,7 +87,9 @@ if __name__ == '__main__':
                                  Assign('a', Var('t')))))))
 
     run_sos(prog2, {})
-"""
+
+    """
     prog3 = Repeat(Assign('x', Minus(Var('x'),ALit(10))), LE(Var('x'), ALit(9)))
     run_sos(prog3, {'x':55})
     run_sos(prog3, {'x':7})
+    """
