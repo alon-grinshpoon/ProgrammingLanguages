@@ -1,0 +1,17 @@
+Your files should compile with:
+
+$ corebuild tests.native
+
+And then run like this:
+
+$ ./tests.native
+
+
+After you compile, you can also use utop to interactively test your implementations like this:
+
+$ utop -I _build/
+utop # #load_rec "tests.cmo";;
+utop # open Parser;;
+utop # open Reducer;;
+utop # open Tests;;
+utop # evaluate ~verbose:true reduce_normal (parse "((\\x. x) y)");;
